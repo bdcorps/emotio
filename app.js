@@ -25,6 +25,9 @@ app.use(bodyParser.json());
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
 
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
 var storage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, './uploads')
@@ -35,7 +38,11 @@ var storage = multer.diskStorage({
     }
 })
 
-app.post('/', function(req, res) {
+app.get('/', function(req, res) {
+    res.render('main.ejs');
+});
+
+app.post('/getstarted', function(req, res) {
     var upload = multer({
         storage: storage
     }).single('upl')
@@ -48,34 +55,46 @@ app.post('/', function(req, res) {
         });
 
         var params = {
-            images_file: fs.createReadStream('./uploads/upl.jpg')
+            images_file: fs.createReadStream('./uploads/upl.jpg'),
+            classifier_ids: ['emotion']
         };
 
         visual_recognition.classify(params, function(err, result) {
             if (err) {
-                console.log(err);
-                res.send('classified ' + err);
+                /*console.log(err);
+                res.send('classified ' + err);*/
+                res.render('getstarted.ejs', {
+                    classifyLabel: 'classified ' + err,
+                    uploadedImage: 'image'
+                });
             } else {
-                console.log(JSON.stringify(result, null, 2));
-                res.send('classified ' + JSON.stringify(result, null, 2));
+                /*console.log(JSON.stringify(result, null, 2));
+                res.send('classified ' + JSON.stringify(result, null, 2));*/
+                res.render('getstarted.ejs', {
+                    classifyLabel: 'classified ' + JSON.stringify(result, null, 2),
+                    uploadedImage: 'image'
+                });
             }
         });
     })
 
 })
 
+app.get('/getstarted', function(req, res) {
+    res.render('getstarted.ejs', {
+        classifyLabel: 'nothing ',
+        uploadedImage: 'image'
+    });
+});
+
+app.get('/image', function(req, res) {
+    res.sendFile(path.resolve('./uploads/upl.jpg'));
+});
+
 app.get('/classify', function(req, res) {
 
 
 })
-
-
-
-
-
-
-
-
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
