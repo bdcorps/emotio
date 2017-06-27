@@ -34,7 +34,7 @@ var storage = multer.diskStorage({
     },
     filename: function(req, file, callback) {
         console.log(file)
-        callback(null, file.fieldname + path.extname(file.originalname))
+        callback(null, file.fieldname + ".jpg")
     }
 })
 
