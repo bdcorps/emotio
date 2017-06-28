@@ -1,5 +1,5 @@
     .jumbotron {
-        background-color: #FF6713;
+        background-color: #ff509e;
         padding-top: 128px;
         padding-bottom: 128px;
         border-radius: 0px;
@@ -85,12 +85,12 @@
     }
 
     .orange-button {
-        color: #FF6713;
+        color: #ff509e;
         background-color: #FFFFFF;
-        border-left-color: #FF6713;
-        border-right-color: #FF6713;
-        border-top-color: #FF6713;
-        border-bottom-color: #FF6713;
+        border-left-color: #ff509e;
+        border-right-color: #ff509e;
+        border-top-color: #ff509e;
+        border-bottom-color: #ff509e;
         text-align: center;
         border-radius: 0px;
     }
@@ -105,7 +105,7 @@
     }
 
     .white-button {
-        color: #FF6713;
+        color: #ff509e;
         background-color: #FFFFFF;
     }
 
@@ -162,12 +162,12 @@
     }
 
     .file-select {
-        color: #FF6713;
+        color: #ff509e;
         background-color: #FFFFFF;
-        border-left-color: #FF6713;
-        border-right-color: #FF6713;
-        border-top-color: #FF6713;
-        border-bottom-color: #FF6713;
+        border-left-color: #ff509e;
+        border-right-color: #ff509e;
+        border-top-color: #ff509e;
+        border-bottom-color: #ff509e;
         border-radius: 0px;
     }
 
@@ -218,12 +218,12 @@
     }
 
     #image-url {
-        background-color: #FF6713;
+        background-color: #ff509e;
         color: #FFFFFF;
     }
 
     .orange-text {
-        color: #FF6713;
+        color: #ff509e;
     }
 
     .container {
@@ -232,4 +232,8 @@
 
     .col-md-6 {
         padding-left: 0px;
+    }
+
+    .image-picker {
+        margin-bottom: 20px;
     }

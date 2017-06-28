@@ -14,13 +14,18 @@ var cfenv = require('cfenv');
 var multer = require('multer'),
     bodyParser = require('body-parser'),
     path = require('path');
+var util = require('util');
 
 var VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3');
 var fs = require('fs');
 
 // create a new express server
 var app = express();
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
+
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -42,13 +47,18 @@ app.get('/', function(req, res) {
     res.render('main.ejs');
 });
 
+app.post('/', function(req, res) {
+    console.log(util.inspect(req.body))
+    res.send('sdafc');
+});
+
 app.post('/getstarted', function(req, res) {
+
+
     var upload = multer({
         storage: storage
     }).single('upl')
     upload(req, res, function(err) {
-
-
         var visual_recognition = new VisualRecognitionV3({
             api_key: '87b5622939ff33ac0bd7a2909a4dd10650a07e7a',
             version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
@@ -78,6 +88,7 @@ app.post('/getstarted', function(req, res) {
         });
     })
 
+    console.log(util.inspect(req.body))
 })
 
 app.get('/getstarted', function(req, res) {
