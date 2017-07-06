@@ -94,7 +94,7 @@ function submitURL(url, res) {
             res.send('classified ' + err);*/
             res.render('getstarted.ejs', {
                 classifyLabel: 'classified ' + err,
-                uploadedImage: 'lmao'
+                uploadedImage: 'error'
             });
         } else {
             /*console.log(JSON.stringify(result, null, 2));
@@ -116,7 +116,7 @@ function submitFile(res) {
     var params = {
         images_file: fs.createReadStream('./uploads/upl.jpg'),
         //url:"http://cdn2.gurl.com/wp-content/uploads/2012/11/sexist-1.jpg",
-        classifier_ids: ['emotion']
+        classifier_ids: ['emotio']
     };
     visual_recognition.classify(params, function(err, result) {
         if (err) {
