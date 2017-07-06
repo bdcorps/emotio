@@ -1,8 +1,3 @@
-
-
-
-
-
 /*eslint-env node*/
 
 //------------------------------------------------------------------------------
@@ -44,7 +39,7 @@ var storage = multer.diskStorage({
     },
     filename: function(req, file, callback) {
         console.log(file)
-        callback(null, file.fieldname  + ".jpg")
+        callback(null, file.fieldname + ".jpg")
     }
 })
 
@@ -54,98 +49,98 @@ app.get('/', function(req, res) {
 
 
 app.post('/getstarted', function(req, res) {
-var upload = multer({
+    var upload = multer({
         storage: storage
     }).single('upl')
 
     upload(req, res, function(err) {
 
 
-if (req.file!=null && req.body.imageurl!=""){submitURL(req.body.imageurl,res);
-   
-}
-else if (req.file !=null){submitFile(res);
-      
-}
- else if (req.body.imageurl!=""){submitURL(req.body.imageurl,res);
-       
-}
- else if (req.file==null && req.body.imageurl==""){
- res.render('getstarted.ejs', {
-                    classifyLabel: "Specify an Image URL or choose an Image file",
-                    uploadedImage: 'image'
-                });
-}
+        if (req.file != null && req.body.imageurl != "") {
+            submitURL(req.body.imageurl, res);
 
-       
+        } else if (req.file != null) {
+            submitFile(res);
+
+        } else if (req.body.imageurl != "") {
+            submitURL(req.body.imageurl, res);
+
+        } else if (req.file == null && req.body.imageurl == "") {
+            res.render('getstarted.ejs', {
+                classifyLabel: "Specify an Image URL or choose an Image file",
+                uploadedImage: 'image'
+            });
+        }
+
+
     })
 
 })
 
-function submitURL(url,res){ 
-        var visual_recognition = new VisualRecognitionV3({
-            api_key: '87b5622939ff33ac0bd7a2909a4dd10650a07e7a',
-            version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
-        });
+function submitURL(url, res) {
+    var visual_recognition = new VisualRecognitionV3({
+        api_key: '87b5622939ff33ac0bd7a2909a4dd10650a07e7a',
+        version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
+    });
 
     var params = {
-       // images_file: fs.createReadStream('./uploads/upl.jpg'),
-           url:url,
-            classifier_ids: ['emotion']
-        };
- visual_recognition.classify(params, function(err, result) {
-            if (err) {
-                /*console.log(err);
-                res.send('classified ' + err);*/
-                res.render('getstarted.ejs', {
-                    classifyLabel: 'classified ' + err,
-                    uploadedImage: 'lmao'
-                });
-            } else {
-                /*console.log(JSON.stringify(result, null, 2));
-                res.send('classified ' + JSON.stringify(result, null, 2));*/
-                res.render('getstarted.ejs', {
-                    classifyLabel: 'classified ' + JSON.stringify(result, null, 2),
-                    uploadedImage: url
-                });
-            }
-        });
+        // images_file: fs.createReadStream('./uploads/upl.jpg'),
+        url: url,
+        classifier_ids: ['emotio']
+    };
+    visual_recognition.classify(params, function(err, result) {
+        if (err) {
+            /*console.log(err);
+            res.send('classified ' + err);*/
+            res.render('getstarted.ejs', {
+                classifyLabel: 'classified ' + err,
+                uploadedImage: 'lmao'
+            });
+        } else {
+            /*console.log(JSON.stringify(result, null, 2));
+            res.send('classified ' + JSON.stringify(result, null, 2));*/
+            res.render('getstarted.ejs', {
+                classifyLabel: 'classified ' + JSON.stringify(result, null, 2),
+                uploadedImage: url
+            });
+        }
+    });
 }
 
-function submitFile(res){ 
+function submitFile(res) {
 
-        var visual_recognition = new VisualRecognitionV3({
-            api_key: '87b5622939ff33ac0bd7a2909a4dd10650a07e7a',
-            version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
-        });
+    var visual_recognition = new VisualRecognitionV3({
+        api_key: '87b5622939ff33ac0bd7a2909a4dd10650a07e7a',
+        version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
+    });
     var params = {
-            images_file: fs.createReadStream('./uploads/upl.jpg'),
-            //url:"http://cdn2.gurl.com/wp-content/uploads/2012/11/sexist-1.jpg",
-            classifier_ids: ['emotion']
-        };
- visual_recognition.classify(params, function(err, result) {
-            if (err) {
-                /*console.log(err);
-                res.send('classified ' + err);*/
-                res.render('getstarted.ejs', {
-                    classifyLabel: 'classified ' + err,
-                    uploadedImage: 'image'
-                });
-            } else {
-                /*console.log(JSON.stringify(result, null, 2));
-                res.send('classified ' + JSON.stringify(result, null, 2));*/
-                res.render('getstarted.ejs', {
-                    classifyLabel: 'classified ' + JSON.stringify(result, null, 2),
-                    uploadedImage: 'image'
-                });
-            }
-        });
+        images_file: fs.createReadStream('./uploads/upl.jpg'),
+        //url:"http://cdn2.gurl.com/wp-content/uploads/2012/11/sexist-1.jpg",
+        classifier_ids: ['emotion']
+    };
+    visual_recognition.classify(params, function(err, result) {
+        if (err) {
+            /*console.log(err);
+            res.send('classified ' + err);*/
+            res.render('getstarted.ejs', {
+                classifyLabel: 'classified ' + err,
+                uploadedImage: 'image'
+            });
+        } else {
+            /*console.log(JSON.stringify(result, null, 2));
+            res.send('classified ' + JSON.stringify(result, null, 2));*/
+            res.render('getstarted.ejs', {
+                classifyLabel: 'classified ' + JSON.stringify(result, null, 2),
+                uploadedImage: 'image'
+            });
+        }
+    });
 }
 
 
 app.get('/getstarted', function(req, res) {
     res.render('getstarted.ejs', {
-        classifyLabel: 'nothing ',
+        classifyLabel: 'none',
         uploadedImage: 'image'
     });
 });
