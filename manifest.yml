@@ -6,5 +6,3 @@ applications:
   name: emotio
   host: emotio
   disk_quota: 1024M
-  services:
-  - emotio-visualrecog
