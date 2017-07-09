@@ -31,7 +31,6 @@ var storage = multer.diskStorage({
 })
 
 app.get('/', function(req, res) {
-    console.log(process.env);
     res.render('main.ejs');
 });
 
@@ -60,7 +59,7 @@ app.post('/getstarted', function(req, res) {
 
 function submitURL(url, res) {
     var visual_recognition = new VisualRecognitionV3({
-        api_key: '16a616ca2498eb685a5b5c9bee70511cba2ae2f',
+        api_key: process.env.visualrecogapi,
         version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
     });
 
