@@ -111,7 +111,7 @@ function submitFile(res) {
 app.get('/getstarted', function(req, res) {
     res.render('getstarted.ejs', {
         classifyLabel: 'no response',
-        uploadedImage: 'no image'
+        uploadedImage: 'image'
     });
 });
 
