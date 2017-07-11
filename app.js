@@ -10,6 +10,12 @@ var VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3'
 var fs = require('fs');
 
 var app = express();
+
+ var visual_recognition = new VisualRecognitionV3({
+        api_key: process.env.visualrecogapi,
+        version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
+    });
+
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -58,11 +64,6 @@ app.post('/getstarted', function(req, res) {
 })
 
 function submitURL(url, res) {
-    var visual_recognition = new VisualRecognitionV3({
-        api_key: process.env.visualrecogapi,
-        version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
-    });
-
     var params = {
         // images_file: fs.createReadStream('./uploads/upl.jpg'),
         url: url,
@@ -84,10 +85,6 @@ function submitURL(url, res) {
 }
 
 function submitFile(res) {
-    var visual_recognition = new VisualRecognitionV3({
-        api_key: '87b5622939ff33ac0bd7a2909a4dd10650a07e7a',
-        version_date: VisualRecognitionV3.VERSION_DATE_2016_05_20
-    });
     var params = {
         images_file: fs.createReadStream('./uploads/upl.jpg'),
         classifier_ids: ['emotion']
