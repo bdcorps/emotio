@@ -87,7 +87,7 @@ function submitURL(url, res) {
 function submitFile(res) {
     var params = {
         images_file: fs.createReadStream('./uploads/upl.jpg'),
-        classifier_ids: ['emotion']
+        classifier_ids: ['emotio']
     };
     visual_recognition.classify(params, function(err, result) {
         if (err) {
